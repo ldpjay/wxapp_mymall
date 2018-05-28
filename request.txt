@@ -1,0 +1,76 @@
+---------------------------------------------------
+c=banner&a=getBanner
+{
+  "code":200,
+  "msg":"success",
+  "data":[
+    {"cid":1,"image":"http://192.168.31.52:8080/JavaEEDemo/res/banner/1.jpg"},
+	{"cid":2,"image":"http://192.168.31.52:8080/JavaEEDemo/res/banner/2.jpg"}
+  ]
+}
+String json = "{\"code\":200,\"msg\":\"success\",\"data\":[{\"cid\":1,\"image\":\"http://192.168.31.52:8080/JavaEEDemo/res/banner/1.jpg\"},{\"cid\":2,\"image\":\"http://192.168.31.52:8080/JavaEEDemo/res/banner/2.jpg\"}]}";
+
+---------------------------------------------------
+c=type&a=getTypeList
+{
+  "code":200,
+  "msg":"success",
+  "list":[
+    {"id":1,"typename":"商品1"},
+	{"id":2,"typename":"商品2"},
+	{"id":3,"typename":"商品3"}
+  ]
+}
+String json = "{\"code\":200,\"msg\":\"success\",\"list\":[{\"id\":1,\"typename\":\"数码\"},{\"id\":2,\"typename\":\"服装\"},{\"id\":3,\"typename\":\"食品\"}]}";
+
+---------------------------------------------------
+c=goods&a=getGoodsList
+{
+  "code":200,
+  "msg":"success",
+  "list":[
+    {"id":1,"title":"iPhone X 128G","price":8999,"thumb":"http://192.168.31.52:8080/JavaEEDemo/res/goods/1.jpg"},
+	{"id":2,"title":"iPhone 8 125G","price":7999,"thumb":"http://192.168.31.52:8080/JavaEEDemo/res/goods/2.jpg"},
+	{"id":3,"title":"MIX 2S 256G","price":3999,"thumb":"http://192.168.31.52:8080/JavaEEDemo/res/goods/3.jpg"},
+	{"id":3,"title":"iPad Pro","price":3999,"thumb":"http://192.168.31.52:8080/JavaEEDemo/res/goods/4.jpg"},
+	{"id":3,"title":"MacBook Air","price":8999,"thumb":"http://192.168.31.52:8080/JavaEEDemo/res/goods/5.jpg"},
+	{"id":3,"title":"MacBook Pro","price":12999,"thumb":"http://192.168.31.52:8080/JavaEEDemo/res/goods/6.jpg"}
+  ]
+}
+String json = "{\"code\":200,\"msg\":\"success\",\"list\":[{\"id\":1,\"title\":\"iPhone X 128G\",\"price\":8999,\"thumb\":\"http://192.168.31.52:8080/JavaEEDemo/res/goods/1.jpg\"},{\"id\":2,\"title\":\"iPhone 8 128G\",\"price\":7999,\"thumb\":\"http://192.168.31.52:8080/JavaEEDemo/res/goods/2.jpg\"},{\"id\":3,\"title\":\"MIX 2S 256G\",\"price\":3999,\"thumb\":\"http://192.168.31.52:8080/JavaEEDemo/res/goods/3.jpg\"},{\"id\":4,\"title\":\"iPad Pro\",\"price\":3999,\"thumb\":\"http://192.168.31.52:8080/JavaEEDemo/res/goods/4.jpg\"},{\"id\":5,\"title\":\"MacBook Air\",\"price\":8999,\"thumb\":\"http://192.168.31.52:8080/JavaEEDemo/res/goods/5.jpg\"},{\"id\":6,\"title\":\"MacBook Pro\",\"price\":12999,\"thumb\":\"http://192.168.31.52:8080/JavaEEDemo/res/goods/6.jpg\"}]}";
+
+---------------------------------------------------
+c=goods&a=getGoodsInfo
+{
+  "code":200,
+  "msg":"success",
+  "data":{"id":2,"title":"小米MIX2S 尊享版","price":3999,"description":"","thumb":"http://192.168.31.52:8080/JavaEEDemo/res/banner/2.jpg"}
+}
+String json = "{\"code\":200,\"msg\":\"success\",\"data\":{\"id\":2,\"title\":\"小米MIX2S 尊享版\",\"price\":3999,\"description\":\"搭载高通骁龙845处理器 256G超大存储 AI感光双摄 全陶瓷机身\",\"thumb\":\"http://192.168.31.52:8080/JavaEEDemo/res/banner/2.jpg\"}}";
+
+---------------------------------------------------
+c=user&a=getAddrList
+{
+  "code":200,
+  "msg":"success",
+  "list":[
+	{"id":10001,"name":"晴天","addr":"广东省深圳市南山区","tel":"18999999999"},
+	{"id":10001,"name":"晴天","addr":"广东省深圳市宝安区","tel":"18888888888"}
+  ]
+}
+String json = "{\"code\":200,\"msg\":\"success\",\"list\":[{\"id\":10001,\"name\":\"晴天\",\"addr\":\"广东省深圳市南山区\",\"tel\":\"18999999999\"},{\"id\":10001,\"name\":\"晴天\",\"addr\":\"广东省深圳市宝安区\",\"tel\":\"18888888888\"}]}";
+
+---------------------------------------------------
+c=user&a=getAddrInfo
+{
+  "code":200,
+  "msg":"success",
+  "data":{"name":"晴天","addr":"广东省深圳市宝安区","tel":"18888888888"}
+}
+String json = "{\"code\":200,\"msg\":\"success\",\"data\":{\"name\":\"晴天\",\"addr\":\"广东省深圳市宝安区\",\"tel\":\"18888888888\"}}";
+
+---------------------------------------------------
+c=user&a=editAddress
+c=user&a=deleteAddr
+
+
