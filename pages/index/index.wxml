@@ -3,13 +3,15 @@
 <view class="nav">
   <view class="list">
     <block wx:for="{{goodsData}}" wx:key="index">
-      <view class="item {{clas[index]}}" data-index="{{index}}" bindtap="xun">{{item.title}}</view>
+      <view class="item {{clas[index]}}" data-index="{{index}}" bindtap="xun">
+        {{item.title}}
+      </view>
     </block>
   </view>
 </view>
 
-<swiper class="swiper" indicator-dots="{{indicatorDots}}"
-        autoplay="{{autoplay}}" interval="{{interval}}"  duration="{{duration}}" current="{{current}}"
+<swiper class="swiper" indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" 
+        interval="{{interval}}"  duration="{{duration}}" current="{{current}}"
         bindchange="switchs">
   <swiper-item data-id="{{item}}">
     <view class="banner">

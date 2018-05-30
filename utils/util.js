@@ -1,3 +1,5 @@
+var hex_md5 = require('md5.js')
+
 function formatTime(date) {
   var year = date.getFullYear()
   var month = date.getMonth() + 1
@@ -10,10 +12,12 @@ function formatTime(date) {
 
   return [year, month, day].map(formatNumber).join('/') + ' ' + [hour, minute, second].map(formatNumber).join(':')
 }
+
 function formatDate (strTime) {
     var date = new Date(strTime);
     return date.getFullYear()+"年"+(date.getMonth()+1)+"月"+date.getDate()+"日";
 }
+
 function formatNumber(n) {
     n = n.toString()
     return n[1] ? n : '0' + n
@@ -31,6 +35,7 @@ function accMul(a, b) {
     } catch (f) {}
     return Number(d.replace(".", "")) * Number(e.replace(".", "")) / Math.pow(10, c); 
 } 
+
 //加法运算中级解决办法
 function accAdd(a, b) {   
     var c, d, e;
@@ -46,6 +51,7 @@ function accAdd(a, b) {
     }
     return e = Math.pow(10, Math.max(c, d)), (a * e + b * e) / e; 
 } 
+
 //返回值：arg1减上arg2的精确结果   
 function accSub(a,b){      
    var c, d, e;
@@ -61,6 +67,7 @@ function accSub(a,b){
     }
     return e = Math.pow(10, Math.max(c, d)), (a * e - b * e) / e;
 }
+
 //返回值：arg1除以arg2的精确结果
 function accDiv(a, b) {
     var c, d, e = 0,
@@ -73,11 +80,20 @@ function accDiv(a, b) {
     } catch (g) {}
     return c = Number(a.toString().replace(".", "")), d = Number(b.toString().replace(".", "")), c / d * Math.pow(10, f - e);
 } 
+
+// 获取token
+function getToken(model, func, key) {
+  var date = new Date();
+  var time = date.getFullYear() + '-' + formatNumber(date.getMonth() + 1) + '-' + date.getDate()
+  return hex_md5.hex_md5(model + func + time + key);
+}
+
 module.exports = {
   formatTime: formatTime,
   formatDate:formatDate,
   accMul: accMul,
-  accAdd:accAdd,
-  accDiv:accDiv,
-  accSub:accSub
+  accAdd: accAdd,
+  accDiv: accDiv,
+  accSub: accSub,
+  getToken: getToken
 }

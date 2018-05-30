@@ -1,5 +1,7 @@
 var config = require('../../config.js')
+var util = require('../../utils/util.js');
 var http = require('../../utils/httpHelper.js')
+
 //index.js
 //获取应用实例
 var app = getApp()
@@ -25,10 +27,14 @@ Page({
       //获取商品信息
       that.getGoodsType();
       //获取Banner
-      http.httpGet("?c=banner&a=getBanner",{appid:config.APPID,},function (res){
-        that.setData({
-          bander:res.data
-        });
+      http.post({ model: "image", func: "getBanner" }, function (res) {
+        if (res) {
+          if (res.code == 200 && res.info == 'success') {
+            that.setData({
+              bander:res.data
+            });
+          }
+        }
       });
       //获取商品列表
       that.getGoodsList("",'1,2',function(list){
@@ -53,18 +59,16 @@ Page({
   //获取商品类型
   getGoodsType:function(){
     var that = this;
-    //var data = {appid:config.APPID,userid:this.data.userInfo.id}
-    var data = { appid: config.APPID }
-    http.httpGet("?c=type&a=getTypeList" ,data, function(res, err){
+    http.post({ model: "goods", func: "getTypeList" }, function (res, err) {
       //请求返回（res = res.data）
       if(res){
-        if(res.code == 200 && res.msg == 'success'){
-          var list = res.list;
-          var goodsData = [{type:0,title:"全部"}];
-          for(var i=1;i<list.length+1;i++){
-            goodsData[i]= {type:list[i-1].id,title:list[i-1].typename};
+        if(res.code == 200 && res.info == 'success'){
+          var list = res.data;
+          var goodsData = [{types: 0, title: "全部"}];
+          for(var i = 1; i < list.length + 1; i++){
+            goodsData[i]= {types: list[i-1].id, title: list[i-1].typename};
           }
-          that.setData({goodsData:goodsData});
+          that.setData({goodsData: goodsData});
           that.loadTabGoodsList(0);
         }
       }else{
@@ -74,16 +78,12 @@ Page({
   },
 
   //获取商品列表
-  getGoodsList:function(type,status,callback){
+  getGoodsList:function(types,status,callback){
     var that = this;
-    var data = {appid:config.APPID,typeid:type,status:status}
-    if(status != '' || status != 0){
-      //data.status = status;
-    }
-    http.httpGet("?c=goods&a=getGoodsList" ,data,function(res, err){
+    http.post({ model: "goods", func: "getGoodsList", types: types}, function (res, err) {
       if(res){
-        if(res.code == 200 && res.msg == 'success'){
-          var list = res.list;
+        if(res.code == 200 && res.info == 'success'){
+          var list = res.data;
           typeof callback == "function" && callback(list)
         }
       }else{
@@ -94,25 +94,25 @@ Page({
 
   //
   loadTabGoodsList:function(index){
-        var that = this;
-        var goodsData = that.data.goodsData;
-        if(goodsData[index].banner == undefined || goodsData[index].list ==undefined){
-              var type = goodsData[index].type; 
-              //获取推荐商品
-              this.getGoodsList(type,'2',function(list){
-                    var goods = that.data.goodsData;
-                    goods[index].banner = list;
-                    that.setData({goodsData:goods});
-              })
-               //获取商品列表
-              this.getGoodsList(type,'1,2',function(list){
-                    var goods = that.data.goodsData;
-                    goods[index].list = list;
-                    that.setData({goodsData:goods});
-              })
-        }
-        
+    var that = this;
+    var goodsData = that.data.goodsData;
+    if(goodsData[index].banner == undefined || goodsData[index].list ==undefined){
+      var types = goodsData[index].types;
+      //获取推荐商品
+      this.getGoodsList(types,'2',function(list) {
+        var goods = that.data.goodsData;
+        goods[index].banner = list;
+        that.setData({goodsData: goods});
+      })
+      //获取商品列表
+      this.getGoodsList(types,'1,2',function(list) {
+        var goods = that.data.goodsData;
+        goods[index].list = list;
+        that.setData({goodsData: goods});
+      })
+    }   
   },
+
   //事件处理函数
   switchs: function(e) {
     var index = e.detail.current;
